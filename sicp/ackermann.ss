@@ -1,0 +1,37 @@
+(define (A x y)
+    (cond ((= y 0) 0)
+          ((= x 0) (* 2 y))
+          ((= y 1) 2)
+          (else (A (- x 1)
+                    (A x (- y 1))))))
+
+(display (A 1 10))
+(display "\n")
+(display (A 2 4))
+(display "\n")
+(display (A 3 3))
+(display "\n")
+
+(define (fib n)
+    (define (fib-iter a b count)
+        (if (= count 0)
+            b
+            (fib-iter (+ a b) a (- count 1))))
+    (fib-iter 1 0 n))
+(display (fib 7))
+(display "\n")
+
+(define (is_even n)
+    (= (remainder n 2) 0))
+(define (expt b n)
+    (define (expt-iter result b n)
+        (cond ((= n 0) 1)
+              ((= n 1) (* result b))
+              ((is_even n) (expt-iter result (* b b) (/ n 2)))
+              (else (expt-iter (* result b) (* b b) (/ (- n 1) 2)))))
+    (expt-iter 1 b n))
+
+(display "expt-----------\n")
+(display (expt 2 16))
+
+(exit)
